@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jira-clone
+    tier: frontend
+    service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jira-clone
+      tier: frontend
+      service: frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: jira-clone
+        tier: frontend
+        service: frontend
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT
+                  name: frontend-config
+          image: jiraclone/frontend
+          imagePullPolicy: Never
+          name: frontend-jira-clone
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

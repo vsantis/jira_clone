@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: jira-clone
+    tier: database
+    service: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jira-clone
+      tier: database
+      service: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jira-clone
+        tier: database
+        service: postgres
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_DB
+                  name: backend-config
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: backend-config
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_USER
+                  name: backend-config
+          image: postgres:10.6-alpine
+          name: postgres-jira-clone
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-volume
+      restartPolicy: Always
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-volume
+status: {}

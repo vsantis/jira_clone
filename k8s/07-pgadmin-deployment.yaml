@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  labels:
+    app: jira-clone
+    tier: dbclient
+    service: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: pgadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: pgadmin
+    spec:
+      containers:
+        - env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: PGADMIN_DEFAULT_EMAIL
+                  name: pgadmin-config
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: PGADMIN_DEFAULT_PASSWORD
+                  name: pgadmin-config
+            - name: PGADMIN_LISTEN_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PGADMIN_LISTEN_PORT
+                  name: pgadmin-config
+          image: dpage/pgadmin4:latest
+          name: pgadmin-jira-clone
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/pgadmin
+              name: pgadmin-volume
+      restartPolicy: Always
+      volumes:
+        - name: pgadmin-volume
+          persistentVolumeClaim:
+            claimName: pgadmin-volume
+status: {}

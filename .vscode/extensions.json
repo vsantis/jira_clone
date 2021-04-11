@@ -5,6 +5,7 @@
     "ms-azuretools.vscode-docker",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
   ]
 }

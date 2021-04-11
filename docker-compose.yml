@@ -1,8 +1,8 @@
 version: '3'
 services:
   backend:
-    container_name: backend_jira
-    image: backend_jira
+    container_name: backend_jira_clone
+    image: jiraclone/backend
     build:
       context: api/
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
     expose:
       - 3000
   postgres:
-    container_name: postgres_jira
+    container_name: postgres_jira_clone
     image: postgres:10.6-alpine
     volumes:
       - postgres-volume:/var/lib/postgresql/data
@@ -25,13 +25,10 @@ services:
     expose:
       - 5432
   pgadmin:
-    container_name: pgadmin_jira
+    container_name: pgadmin_jira_clone
     image: dpage/pgadmin4:latest
     restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
-      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
-      PGADMIN_LISTEN_PORT: 80
+    env_file: .env
     links:
       - 'postgres'
     ports:
@@ -41,8 +38,8 @@ services:
     depends_on:
       - postgres
   frontend:
-    container_name: frontend_jira
-    image: frontend_jira
+    container_name: frontend_jira_clone
+    image: jiraclone/frontend
     build:
       context: client/
       dockerfile: Dockerfile
