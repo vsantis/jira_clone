@@ -1,14 +1,21 @@
 {
   "name": "jira_api",
   "version": "1.0.0",
-  "author": "Ivor Reic",
   "license": "MIT",
+  "author": "Ivor Reic",
   "scripts": {
     "start": "nodemon --exec ts-node --files src/index.ts",
     "start:test": "cross-env NODE_ENV='test' DB_DATABASE='jira_test' npm start",
-    "start:production": "pm2 start --name 'jira_api' node -- -r ./tsconfig-paths.js build/index.js",
+    "start:production": "pm2-runtime --name 'jira_api' node -- -r ./tsconfig-paths.js build/index.js",
     "build": "cd src && tsc",
     "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -22,6 +29,7 @@
     "pg": "^7.14.0",
     "reflect-metadata": "^0.1.13",
     "striptags": "^3.1.1",
+    "tsconfig-paths": "^3.9.0",
     "typeorm": "^0.2.20"
   },
   "devDependencies": {
@@ -44,17 +52,9 @@
     "nodemon": "^2.0.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.5.2",
-    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.2"
   },
   "_moduleDirectories": [
     "src"
-  ],
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  }
+  ]
 }

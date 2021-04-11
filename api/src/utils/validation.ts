@@ -44,9 +44,8 @@ export const generateErrors = (
   fieldValidators: FieldValidators,
 ): FieldErrors => {
   const fieldErrors: FieldErrors = {};
-
   Object.entries(fieldValidators).forEach(([fieldName, validators]) => {
-    [validators].flat().forEach(validator => {
+    [validators].flat(2).forEach(validator => {
       const errorMessage = validator(fieldValues[fieldName], fieldValues);
 
       if (errorMessage !== false && !fieldErrors[fieldName]) {

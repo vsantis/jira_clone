@@ -1,0 +1,14 @@
+/cypress
+/jest
+.gitignore
+.env
+.env.example
+.eslintignore
+.eslintrc.json
+.prettierrc
+README.md
+/node_modules
+Dockerfile
+.dockerignore
+cypress.json
+jest.config.json

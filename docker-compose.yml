@@ -1,0 +1,58 @@
+version: '3'
+services:
+  backend:
+    container_name: backend_jira
+    image: backend_jira
+    build:
+      context: api/
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    env_file: api/.env
+    links:
+      - 'postgres'
+    expose:
+      - 3000
+  postgres:
+    container_name: postgres_jira
+    image: postgres:10.6-alpine
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    restart: always
+    env_file: api/.env
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+  pgadmin:
+    container_name: pgadmin_jira
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+      PGADMIN_LISTEN_PORT: 80
+    links:
+      - 'postgres'
+    ports:
+      - '80:80'
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+    depends_on:
+      - postgres
+  frontend:
+    container_name: frontend_jira
+    image: frontend_jira
+    build:
+      context: client/
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    env_file: client/.env
+    links:
+      - 'backend'
+    ports:
+      - '8080:8080'
+volumes:
+  postgres-volume:
+  pgadmin-volume:
