@@ -25,11 +25,10 @@ spec:
         - env:
             - name: PORT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PORT
-                  name: frontend-config
-          image: jiraclone/frontend
-          imagePullPolicy: Never
+                  name: frontend-env
+          image: vsantis/frontend-jira-clone
           name: frontend-jira-clone
           ports:
             - containerPort: 8080

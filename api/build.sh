@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t jiraclone/backend ./api/
+docker build -t vsantis/backend-jira-clone ./api/

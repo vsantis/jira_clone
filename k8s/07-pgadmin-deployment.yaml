@@ -22,17 +22,17 @@ spec:
         - env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PGADMIN_DEFAULT_EMAIL
                   name: pgadmin-config
             - name: PGADMIN_DEFAULT_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PGADMIN_DEFAULT_PASSWORD
                   name: pgadmin-config
             - name: PGADMIN_LISTEN_PORT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PGADMIN_LISTEN_PORT
                   name: pgadmin-config
           image: dpage/pgadmin4:latest

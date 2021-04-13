@@ -26,19 +26,19 @@ spec:
         - env:
             - name: POSTGRES_DB
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_DB
-                  name: backend-config
+                  name: db-config
             - name: POSTGRES_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_PASSWORD
-                  name: backend-config
+                  name: db-config
             - name: POSTGRES_USER
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: POSTGRES_USER
-                  name: backend-config
+                  name: db-config
           image: postgres:10.6-alpine
           name: postgres-jira-clone
           ports:

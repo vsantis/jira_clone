@@ -25,41 +25,40 @@ spec:
         - env:
             - name: DB_DATABASE
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: DB_DATABASE
-                  name: backend-config
+                  name: backend-env
             - name: DB_HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: DB_HOST
-                  name: backend-config
+                  name: backend-env
             - name: DB_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: DB_PASSWORD
-                  name: backend-config
+                  name: backend-env
             - name: DB_PORT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: DB_PORT
-                  name: backend-config
+                  name: backend-env
             - name: DB_USERNAME
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: DB_USERNAME
-                  name: backend-config
+                  name: backend-env
             - name: JWT_SECRET
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: JWT_SECRET
-                  name: backend-config
+                  name: backend-env
             - name: NODE_ENV
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: NODE_ENV
-                  name: backend-config
-          image: jiraclone/backend
-          imagePullPolicy: Never
+                  name: backend-env
+          image: vsantis/backend-jira-clone
           name: backend-jira-clone
           ports:
             - containerPort: 3000
