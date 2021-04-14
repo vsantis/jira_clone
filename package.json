@@ -17,5 +17,7 @@
       "pre-commit": "npm run pre-commit"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "pm2": "^4.5.6"
+  }
 }

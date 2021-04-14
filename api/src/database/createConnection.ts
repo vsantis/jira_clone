@@ -12,6 +12,7 @@ const createDatabaseConnection = (): Promise<Connection> =>
     database: process.env.DB_DATABASE,
     entities: Object.values(entities),
     synchronize: true,
+    ssl: true,
   });
 
 export default createDatabaseConnection;

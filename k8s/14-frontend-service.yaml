@@ -4,6 +4,7 @@ metadata:
   labels:
     service: frontend
   name: frontend
+  namespace: mi-espacio
 spec:
   ports:
     - name: "8080"

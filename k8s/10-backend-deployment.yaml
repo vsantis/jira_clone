@@ -6,6 +6,7 @@ metadata:
     tier: backend
     service: backend
   name: backend
+  namespace: mi-espacio
 spec:
   replicas: 1
   selector:
@@ -58,7 +59,7 @@ spec:
                 secretKeyRef:
                   key: NODE_ENV
                   name: backend-env
-          image: vsantis/backend-jira-clone
+          image: us.gcr.io/main-cyclist-310615/api
           name: backend-jira-clone
           ports:
             - containerPort: 3000

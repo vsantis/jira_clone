@@ -6,6 +6,7 @@ metadata:
     tier: frontend
     service: frontend
   name: frontend
+  namespace: mi-espacio
 spec:
   replicas: 1
   selector:
@@ -28,7 +29,7 @@ spec:
                 secretKeyRef:
                   key: PORT
                   name: frontend-env
-          image: vsantis/frontend-jira-clone
+          image: us.gcr.io/main-cyclist-310615/client
           name: frontend-jira-clone
           ports:
             - containerPort: 8080
