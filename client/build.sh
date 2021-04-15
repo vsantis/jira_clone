@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t vsantis/frontend-jira-clone ./client/
+docker build -t us.gcr.io/main-cyclist-310615/client .

@@ -1,3 +1,29 @@
+<h1 align="center">Curso Docker - Kubernetes 
+Evaluación Final 
+</h1>
+
+## ¿Como puedo levantar el cluster?
+
+Para poder levantar el cluster es necesario tener configurado kubectl y estar logeado en docker.
+
+Una vez estos pasos sean correctos, solo necesita ejecutar *run.sh* ubicado en la raiz del proyecto
+
+
+el proyecto consta de un  <a href="http://34.75.142.78:8080/project/board">frontend</a> y un **backend**
+
+
+http://34.75.142.78:8080/project/board
+## Features
+
+- Proven, scalable, and easy to understand project structure
+- Written in modern React, only functional components with hooks
+- A variety of custom light-weight UI components such as datepicker, modal, various form elements etc
+- Simple local React state management, without redux, mobx, or similar
+- Custom webpack setup, without create-react-app or similar
+- Client written in Babel powered JavaScript
+- API written in TypeScript and using TypeORM
+
+
 <h1 align="center">A simplified Jira clone built with React and Node</h1>
 
 <div align="center">Auto formatted with Prettier, tested with Cypress 🎗</div>

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Login into Docker Hub..."
-docker login
+# echo "Login into Docker Hub..."
+# docker login
 
 echo "Build backend image..."
 sh ./api/build.sh
@@ -9,15 +9,9 @@ sh ./api/build.sh
 echo "Build frontend image..."
 sh ./client/build.sh
 
-echo "Create backend repository..."
-docker tag vsantis/backend-jira-clone:latest vsantis/backend-jira-clone:latest
-
-echo "Create frontend repository..."
-docker tag vsantis/frontend-jira-clone:latest vsantis/frontend-jira-clone:latest
-
 echo "Push repositories..."
-docker push vsantis/backend-jira-clone:latest
-docker push vsantis/frontend-jira-clone:latest
+docker push us.gcr.io/main-cyclist-310615/api
+docker push us.gcr.io/main-cyclist-310615/client
 
 echo "Applying kubernetes configuration files..."
 for FILE in k8s/*.yaml; do kubectl apply -f $FILE; done 
